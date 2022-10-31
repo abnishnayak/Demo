@@ -1,0 +1,36 @@
+#WAP to eliminate the first occurences in the string.
+
+
+import java.util.Scanner;
+
+public class EliminateOccurence {
+
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		
+		System.out.println("Enter a sentence is string: ");
+		String sentence=s.nextLine();
+		String arr[]=sentence.split(" ");
+		
+		System.out.println("Enter a word to eliminate: ");
+		String word=s.next();
+		
+		for(int i=0;i<arr.length;i++) {
+				if (word.equals(arr[i]))
+				{
+					arr[i]="";
+				}
+		}
+			String str=arr[0];
+			for (int i=1;i<arr.length ;i++ )
+			{
+				if (!arr[i].equals(""))
+				{
+					str=str+" "+arr[i];
+				}
+			}
+		System.out.println(str);
+		s.close();
+	}
+
+}
