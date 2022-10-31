@@ -29,7 +29,6 @@ public class EliminateOccurence {
 					str=str+" "+arr[i];
 				}
 			}
-		System.out.println(str);
 		s.close();
 	}
 
