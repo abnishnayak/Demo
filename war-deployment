@@ -1,0 +1,33 @@
+package com.abnishn.sbwardeploymentex;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+
+public class DemoRestController {
+	@GetMapping("/cat")
+	public String hello() {
+		return "hello cat tom, have a nice day.";
+	}
+}
+
+
+package com.abnishn.sbwardeploymentex;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+@SpringBootApplication
+
+public class SbWarDeploymentExApplication extends SpringBootServletInitializer{
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(SbWarDeploymentExApplication.class);
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(SbWarDeploymentExApplication.class, args);
+	}
+}
