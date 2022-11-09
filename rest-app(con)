@@ -22,7 +22,28 @@ public class HelloWorldController {
 		return new HelloWorldBean(String.format("hello %s, have a nice day.", name));
 	}
 }
+------------------------------------------------------------------------------------------------------------------------------------
+package com.abnishn.server.main.hw;
 
+public class HelloWorldBean {
+	public String message;
+	
+	public HelloWorldBean(String message) {
+		this.message=message;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	@Override
+	public String toString() {
+		return String.format("hello world %s", message);
+	}
+----------------------------------------------------------------------------------------------------------------------
 package com.abnishn.server.main;
 
 import org.springframework.boot.SpringApplication;
