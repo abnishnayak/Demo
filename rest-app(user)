@@ -1,0 +1,96 @@
+package com.abnishn.server.main.user;
+
+import java.util.Date;
+
+public class User {
+	public User(Integer id,String name,Date dob) {
+			super();
+			this.id=id;
+			this.name=name;
+			this.dob=dob;
+	}
+	private Integer id;
+	private String name;
+	private Date dob;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+	@Override
+	public String toString() {
+		return String.format("User [id=%s, name=%s, dob=%s]", id, name, dob);
+	}
+}
+-----------------------------------------------------------------------------------------------------------------------------------
+package com.abnishn.server.main.user;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.springframework.stereotype.Component;
+@Component
+
+public class UserDaoService {
+	public static int usersCount=4;
+	private static List <User> users=new ArrayList<>();
+	static {
+		users.add(new User(1,"Ram",new Date()));
+		users.add(new User(2,"Shyam",new Date()));
+		users.add(new User(3,"Bharat",new Date()));
+		users.add(new User(4,"Laxman",new Date()));
+	}
+	public List<User>findAll(){
+		return users;
+	}
+	public User save(User user) {
+		if(user.getId()==null) {
+			user.setId(++usersCount);
+		}
+		users.add(user);
+		return user;
+	}
+	public User findOne(int id) {
+		for(User user:users) {
+			if(user.getId()==id) {
+				return user;
+			}
+		}
+		return null;
+	}
+}
+------------------------------------------------------------------------------
+package com.abnishn.server.main.user;
+
+import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+
+public class UserResource {
+	@Autowired
+	private UserDaoService service;
+	@GetMapping("/users")
+	public List<User> retriveAllUsers(){
+		return service.findAll();
+	}
+	@GetMapping("/users/{id}")
+	public User retriveUser(@PathVariable int id) {
+		return service.findOne(id);
+	}
+}
