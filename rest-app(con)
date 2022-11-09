@@ -1,0 +1,59 @@
+package com.abnishn.server.main.hw;
+
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.context.annotation.Configuration;
+@Configuration
+@RestController
+
+public class HelloWorldController {
+	
+	@GetMapping(path="/hello-world")
+	public String helloWorld() {
+		return "Hello World.";
+	}
+	@GetMapping(path="/hello-world-bean")
+	public HelloWorldBean helloWorldBean() {
+		return new HelloWorldBean("hello sb demo");
+	}
+	@GetMapping(path="/demo/{name}")
+	public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
+		return new HelloWorldBean(String.format("hello %s, have a nice day.", name));
+	}
+}
+------------------------------------------------------------------------------------------------------------------------------------
+package com.abnishn.server.main.hw;
+
+public class HelloWorldBean {
+	public String message;
+	
+	public HelloWorldBean(String message) {
+		this.message=message;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	@Override
+	public String toString() {
+		return String.format("hello world %s", message);
+	}
+----------------------------------------------------------------------------------------------------------------------
+package com.abnishn.server.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+@SpringBootApplication
+
+public class RestWsApplication {
+
+	public static void main(String[] args) {
+		
+		SpringApplication.run(RestWsApplication.class, args);
+	}
+}
